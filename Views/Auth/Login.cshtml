@@ -1,0 +1,35 @@
+﻿@model AdoptPets.ViewModels.LoginViewModel
+
+@{
+    ViewBag.Title = "Prijava";
+}
+
+<div class="auth-container">
+    <h2 class="auth-title">Prijava</h2>
+
+    @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.Hidden("returnUrl", ViewBag.ReturnUrl as string)
+
+        <div>
+            @Html.LabelFor(m => m.usernameOrEmail, "Korisničko ime ili Email")
+            @Html.TextBoxFor(m => m.usernameOrEmail)
+            @Html.ValidationMessageFor(m => m.usernameOrEmail, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.password, "Lozinka")
+            @Html.PasswordFor(m => m.password)
+            @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+        </div>
+
+        <button type="submit" class="auth-btn">Prijavite se</button>
+
+        <div class="auth-link">
+            Nemate nalog?
+            @Html.ActionLink("Registrujte se", "Register", "Auth")
+        </div>
+    }
+</div>

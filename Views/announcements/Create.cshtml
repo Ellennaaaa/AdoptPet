@@ -1,0 +1,94 @@
+﻿@model AdoptPets.ViewModels.CreateAnnouncementViewModel
+
+@{
+    ViewBag.Title = "Dodaj oglas";
+}
+
+<div class="auth-container">
+    <h2 class="auth-title">Dodaj životinju za usvajanje</h2>
+
+    @using (Html.BeginForm("Create", "announcements", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div>
+            @Html.LabelFor(m => m.animalName, "Ime životinje")
+            @Html.TextBoxFor(m => m.animalName)
+            @Html.ValidationMessageFor(m => m.animalName, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.id_species, "Vrsta/rasa")
+            @Html.DropDownList("id_species", null, "Izaberite vrstu/rasu")
+            @Html.ValidationMessageFor(m => m.id_species, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.id_gender, "Pol")
+            @Html.DropDownList("id_gender", null, "Izaberite pol")
+            @Html.ValidationMessageFor(m => m.id_gender, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.animalDateOfBirth, "Datum rođenja")
+            @Html.TextBoxFor(m => m.animalDateOfBirth, "{0:yyyy-MM-dd}", new { type = "date" })
+            @Html.ValidationMessageFor(m => m.animalDateOfBirth, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.description, "Opis")
+            @Html.TextAreaFor(m => m.description)
+            @Html.ValidationMessageFor(m => m.description, "", new { @class = "text-danger" })
+        </div>
+
+        <h4>Stanja</h4>
+        foreach (var condition in ViewBag.Conditions)
+        {
+            <label class="checkbox-label">
+                <input type="checkbox" name="selectedConditions" value="@condition.id" />
+                @condition.name
+            </label>
+        }
+
+        <h4>Vakcine</h4>
+        foreach (var vaccine in ViewBag.Vaccines)
+        {
+            <label class="checkbox-label">
+                <input type="checkbox" name="selectedVaccines" value="@vaccine.id" />
+                @vaccine.name
+            </label>
+        }
+
+        <div>
+            <label>Fotografije</label>
+            <div class="file-upload-container">
+                <label for="images" class="file-upload-btn">
+                    Izaberite fotografije
+                </label>
+
+                <input type="file" id="images" name="images" multiple hidden />
+
+                <span id="file-name">
+                    Nijedan fajl nije izabran
+                </span>
+            </div>
+        </div>
+
+        <button type="submit" class="auth-btn">Dodaj oglas</button>
+    }
+</div>
+
+<script>
+document.getElementById("images").addEventListener("change", function () {
+
+    let text = "Nijedan fajl nije izabran";
+
+    if (this.files.length === 1)
+        text = this.files[0].name;
+    else if (this.files.length > 1)
+        text = this.files.length + " fajlova izabrano";
+
+    document.getElementById("file-name").textContent = text;
+});
+</script>

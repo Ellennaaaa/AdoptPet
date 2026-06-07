@@ -1,0 +1,1516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="adoptpetsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adoptions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_request" Type="int" Nullable="false" />
+          <Property Name="id_animal" Type="int" Nullable="false" />
+          <Property Name="id_previous_owner" Type="int" Nullable="false" />
+          <Property Name="id_new_owner" Type="int" Nullable="false" />
+          <Property Name="adoption_date" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Animal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="id_species" Type="int" />
+          <Property Name="dateOfBirth" Type="date" />
+          <Property Name="id_user" Type="int" />
+          <Property Name="id_gender" Type="int" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="animal_conditions">
+          <Key>
+            <PropertyRef Name="id_animal" />
+            <PropertyRef Name="id_condition" />
+          </Key>
+          <Property Name="id_animal" Type="int" Nullable="false" />
+          <Property Name="id_condition" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="animal_vaccines">
+          <Key>
+            <PropertyRef Name="id_animal" />
+            <PropertyRef Name="id_vaccine" />
+          </Key>
+          <Property Name="id_animal" Type="int" Nullable="false" />
+          <Property Name="id_vaccine" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="announcements">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="int" />
+          <Property Name="id_animal" Type="int" />
+          <Property Name="dateAnn" Type="date" />
+          <Property Name="status" Type="bit" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="updated_at" Type="datetime2" Precision="7" />
+          <Property Name="description" Type="text" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Conditions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="images">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_animal" Type="int" />
+          <Property Name="title" Type="varchar" MaxLength="100" />
+          <Property Name="image_path" Type="varchar" MaxLength="255" />
+          <Property Name="tookOn" Type="date" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jobs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_city" Type="int" />
+          <Property Name="address" Type="varchar" MaxLength="255" />
+          <Property Name="latitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="longitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="requests">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_ann" Type="int" />
+          <Property Name="id_user" Type="int" />
+          <Property Name="id_status" Type="int" />
+          <Property Name="dateReq" Type="date" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="updated_at" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Residences">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Species">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mark" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="updates">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_adoption" Type="int" />
+          <Property Name="description" Type="text" />
+          <Property Name="image_path" Type="varchar" MaxLength="255" />
+          <Property Name="dateTook" Type="date" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="surname" Type="varchar" MaxLength="100" />
+          <Property Name="email" Type="varchar" MaxLength="250" />
+          <Property Name="password" Type="varchar" MaxLength="255" />
+          <Property Name="username" Type="varchar" MaxLength="200" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="familyMembers" Type="int" />
+          <Property Name="dateOfBirth" Type="date" />
+          <Property Name="id_role" Type="int" />
+          <Property Name="id_residence" Type="int" />
+          <Property Name="id_location" Type="int" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="updated_at" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="users_jobs">
+          <Key>
+            <PropertyRef Name="id_user" />
+            <PropertyRef Name="id_job" />
+          </Key>
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="id_job" Type="int" Nullable="false" />
+          <Property Name="salary" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vaccines">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="created_at" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Adoptions__id_an__367C1819">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+          <End Role="Adoptions" Type="Self.Adoptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Adoptions">
+              <PropertyRef Name="id_animal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adoptions__id_ne__3587F3E0">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Adoptions" Type="Self.Adoptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Adoptions">
+              <PropertyRef Name="id_new_owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adoptions__id_pr__3493CFA7">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Adoptions" Type="Self.Adoptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Adoptions">
+              <PropertyRef Name="id_previous_owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adoptions__id_re__339FAB6E">
+          <End Role="requests" Type="Self.requests" Multiplicity="1" />
+          <End Role="Adoptions" Type="Self.Adoptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="requests">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Adoptions">
+              <PropertyRef Name="id_request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__id_gende__08B54D69">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="id_gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__id_speci__09A971A2">
+          <End Role="Species" Type="Self.Species" Multiplicity="0..1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Species">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="id_species" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__id_user__07C12930">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animal_co__id_an__10566F31">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+          <End Role="animal_conditions" Type="Self.animal_conditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="animal_conditions">
+              <PropertyRef Name="id_animal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animal_co__id_co__114A936A">
+          <End Role="Conditions" Type="Self.Conditions" Multiplicity="1" />
+          <End Role="animal_conditions" Type="Self.animal_conditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conditions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="animal_conditions">
+              <PropertyRef Name="id_condition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animal_va__id_an__17F790F9">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+          <End Role="animal_vaccines" Type="Self.animal_vaccines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="animal_vaccines">
+              <PropertyRef Name="id_animal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animal_va__id_va__18EBB532">
+          <End Role="Vaccines" Type="Self.Vaccines" Multiplicity="1" />
+          <End Role="animal_vaccines" Type="Self.animal_vaccines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaccines">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="animal_vaccines">
+              <PropertyRef Name="id_vaccine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__announcem__id_an__25518C17">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+          <End Role="announcements" Type="Self.announcements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="announcements">
+              <PropertyRef Name="id_animal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__announcem__id_us__2645B050">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="announcements" Type="Self.announcements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="announcements">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__images__id_anima__1CBC4616">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+          <End Role="images" Type="Self.images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="images">
+              <PropertyRef Name="id_animal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Locations__id_ci__6E01572D">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+          <End Role="Locations" Type="Self.Locations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Locations">
+              <PropertyRef Name="id_city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__requests__id_ann__2CF2ADDF">
+          <End Role="announcements" Type="Self.announcements" Multiplicity="0..1" />
+          <End Role="requests" Type="Self.requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="announcements">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="requests">
+              <PropertyRef Name="id_ann" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__requests__id_sta__2EDAF651">
+          <End Role="status" Type="Self.status" Multiplicity="0..1" />
+          <End Role="requests" Type="Self.requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="requests">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__requests__id_use__2DE6D218">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="requests" Type="Self.requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="requests">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__updates__id_adop__3A4CA8FD">
+          <End Role="Adoptions" Type="Self.Adoptions" Multiplicity="0..1" />
+          <End Role="updates" Type="Self.updates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adoptions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="updates">
+              <PropertyRef Name="id_adoption" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__id_locati__787EE5A0">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__id_reside__797309D9">
+          <End Role="Residences" Type="Self.Residences" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residences">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_residence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__id_role__778AC167">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users_job__id_jo__7E37BEF6">
+          <End Role="Jobs" Type="Self.Jobs" Multiplicity="1" />
+          <End Role="users_jobs" Type="Self.users_jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jobs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users_jobs">
+              <PropertyRef Name="id_job" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users_job__id_us__7D439ABD">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="users_jobs" Type="Self.users_jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users_jobs">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="adoptpetsModelStoreContainer">
+          <EntitySet Name="Adoptions" EntityType="Self.Adoptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Animal" EntityType="Self.Animal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="animal_conditions" EntityType="Self.animal_conditions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="animal_vaccines" EntityType="Self.animal_vaccines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="announcements" EntityType="Self.announcements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conditions" EntityType="Self.Conditions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="images" EntityType="Self.images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="requests" EntityType="Self.requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Residences" EntityType="Self.Residences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Species" EntityType="Self.Species" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="updates" EntityType="Self.updates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users_jobs" EntityType="Self.users_jobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vaccines" EntityType="Self.Vaccines" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Adoptions__id_an__367C1819" Association="Self.FK__Adoptions__id_an__367C1819">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="Adoptions" EntitySet="Adoptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adoptions__id_ne__3587F3E0" Association="Self.FK__Adoptions__id_ne__3587F3E0">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Adoptions" EntitySet="Adoptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adoptions__id_pr__3493CFA7" Association="Self.FK__Adoptions__id_pr__3493CFA7">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Adoptions" EntitySet="Adoptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adoptions__id_re__339FAB6E" Association="Self.FK__Adoptions__id_re__339FAB6E">
+            <End Role="requests" EntitySet="requests" />
+            <End Role="Adoptions" EntitySet="Adoptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__id_gende__08B54D69" Association="Self.FK__Animal__id_gende__08B54D69">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__id_speci__09A971A2" Association="Self.FK__Animal__id_speci__09A971A2">
+            <End Role="Species" EntitySet="Species" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__id_user__07C12930" Association="Self.FK__Animal__id_user__07C12930">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animal_co__id_an__10566F31" Association="Self.FK__animal_co__id_an__10566F31">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="animal_conditions" EntitySet="animal_conditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animal_co__id_co__114A936A" Association="Self.FK__animal_co__id_co__114A936A">
+            <End Role="Conditions" EntitySet="Conditions" />
+            <End Role="animal_conditions" EntitySet="animal_conditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animal_va__id_an__17F790F9" Association="Self.FK__animal_va__id_an__17F790F9">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="animal_vaccines" EntitySet="animal_vaccines" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animal_va__id_va__18EBB532" Association="Self.FK__animal_va__id_va__18EBB532">
+            <End Role="Vaccines" EntitySet="Vaccines" />
+            <End Role="animal_vaccines" EntitySet="animal_vaccines" />
+          </AssociationSet>
+          <AssociationSet Name="FK__announcem__id_an__25518C17" Association="Self.FK__announcem__id_an__25518C17">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="announcements" EntitySet="announcements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__announcem__id_us__2645B050" Association="Self.FK__announcem__id_us__2645B050">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="announcements" EntitySet="announcements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__images__id_anima__1CBC4616" Association="Self.FK__images__id_anima__1CBC4616">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="images" EntitySet="images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Locations__id_ci__6E01572D" Association="Self.FK__Locations__id_ci__6E01572D">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Locations" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__requests__id_ann__2CF2ADDF" Association="Self.FK__requests__id_ann__2CF2ADDF">
+            <End Role="announcements" EntitySet="announcements" />
+            <End Role="requests" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__requests__id_sta__2EDAF651" Association="Self.FK__requests__id_sta__2EDAF651">
+            <End Role="status" EntitySet="status" />
+            <End Role="requests" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__requests__id_use__2DE6D218" Association="Self.FK__requests__id_use__2DE6D218">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="requests" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__updates__id_adop__3A4CA8FD" Association="Self.FK__updates__id_adop__3A4CA8FD">
+            <End Role="Adoptions" EntitySet="Adoptions" />
+            <End Role="updates" EntitySet="updates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__id_locati__787EE5A0" Association="Self.FK__Users__id_locati__787EE5A0">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__id_reside__797309D9" Association="Self.FK__Users__id_reside__797309D9">
+            <End Role="Residences" EntitySet="Residences" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__id_role__778AC167" Association="Self.FK__Users__id_role__778AC167">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users_job__id_jo__7E37BEF6" Association="Self.FK__users_job__id_jo__7E37BEF6">
+            <End Role="Jobs" EntitySet="Jobs" />
+            <End Role="users_jobs" EntitySet="users_jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users_job__id_us__7D439ABD" Association="Self.FK__users_job__id_us__7D439ABD">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="users_jobs" EntitySet="users_jobs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="adoptpetsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adoption">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_request" Type="Int32" Nullable="false" />
+          <Property Name="id_animal" Type="Int32" Nullable="false" />
+          <Property Name="id_previous_owner" Type="Int32" Nullable="false" />
+          <Property Name="id_new_owner" Type="Int32" Nullable="false" />
+          <Property Name="adoption_date" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Animal" Relationship="Self.FK__Adoptions__id_an__367C1819" FromRole="Adoptions" ToRole="Animal" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Adoptions__id_ne__3587F3E0" FromRole="Adoptions" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK__Adoptions__id_pr__3493CFA7" FromRole="Adoptions" ToRole="Users" />
+          <NavigationProperty Name="request" Relationship="Self.FK__Adoptions__id_re__339FAB6E" FromRole="Adoptions" ToRole="requests" />
+          <NavigationProperty Name="updates" Relationship="Self.FK__updates__id_adop__3A4CA8FD" FromRole="Adoptions" ToRole="updates" />
+        </EntityType>
+        <EntityType Name="Animal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="id_species" Type="Int32" />
+          <Property Name="dateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="id_gender" Type="Int32" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Adoptions" Relationship="Self.FK__Adoptions__id_an__367C1819" FromRole="Animal" ToRole="Adoptions" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK__Animal__id_gende__08B54D69" FromRole="Animal" ToRole="Gender" />
+          <NavigationProperty Name="Species" Relationship="Self.FK__Animal__id_speci__09A971A2" FromRole="Animal" ToRole="Species" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Animal__id_user__07C12930" FromRole="Animal" ToRole="Users" />
+          <NavigationProperty Name="animal_conditions" Relationship="Self.FK__animal_co__id_an__10566F31" FromRole="Animal" ToRole="animal_conditions" />
+          <NavigationProperty Name="animal_vaccines" Relationship="Self.FK__animal_va__id_an__17F790F9" FromRole="Animal" ToRole="animal_vaccines" />
+          <NavigationProperty Name="announcements" Relationship="Self.FK__announcem__id_an__25518C17" FromRole="Animal" ToRole="announcements" />
+          <NavigationProperty Name="images" Relationship="Self.FK__images__id_anima__1CBC4616" FromRole="Animal" ToRole="images" />
+        </EntityType>
+        <EntityType Name="animal_conditions">
+          <Key>
+            <PropertyRef Name="id_animal" />
+            <PropertyRef Name="id_condition" />
+          </Key>
+          <Property Name="id_animal" Type="Int32" Nullable="false" />
+          <Property Name="id_condition" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Animal" Relationship="Self.FK__animal_co__id_an__10566F31" FromRole="animal_conditions" ToRole="Animal" />
+          <NavigationProperty Name="Condition" Relationship="Self.FK__animal_co__id_co__114A936A" FromRole="animal_conditions" ToRole="Conditions" />
+        </EntityType>
+        <EntityType Name="animal_vaccines">
+          <Key>
+            <PropertyRef Name="id_animal" />
+            <PropertyRef Name="id_vaccine" />
+          </Key>
+          <Property Name="id_animal" Type="Int32" Nullable="false" />
+          <Property Name="id_vaccine" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Animal" Relationship="Self.FK__animal_va__id_an__17F790F9" FromRole="animal_vaccines" ToRole="Animal" />
+          <NavigationProperty Name="Vaccine" Relationship="Self.FK__animal_va__id_va__18EBB532" FromRole="animal_vaccines" ToRole="Vaccines" />
+        </EntityType>
+        <EntityType Name="announcement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="id_animal" Type="Int32" />
+          <Property Name="dateAnn" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="updated_at" Type="DateTime" Precision="7" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Animal" Relationship="Self.FK__announcem__id_an__25518C17" FromRole="announcements" ToRole="Animal" />
+          <NavigationProperty Name="User" Relationship="Self.FK__announcem__id_us__2645B050" FromRole="announcements" ToRole="Users" />
+          <NavigationProperty Name="requests" Relationship="Self.FK__requests__id_ann__2CF2ADDF" FromRole="announcements" ToRole="requests" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Locations" Relationship="Self.FK__Locations__id_ci__6E01572D" FromRole="Cities" ToRole="Locations" />
+        </EntityType>
+        <EntityType Name="Condition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="animal_conditions" Relationship="Self.FK__animal_co__id_co__114A936A" FromRole="Conditions" ToRole="animal_conditions" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Animals" Relationship="Self.FK__Animal__id_gende__08B54D69" FromRole="Gender" ToRole="Animal" />
+        </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_animal" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="image_path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tookOn" Type="DateTime" Precision="0" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Animal" Relationship="Self.FK__images__id_anima__1CBC4616" FromRole="images" ToRole="Animal" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="users_jobs" Relationship="Self.FK__users_job__id_jo__7E37BEF6" FromRole="Jobs" ToRole="users_jobs" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_city" Type="Int32" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="latitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="longitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="City" Relationship="Self.FK__Locations__id_ci__6E01572D" FromRole="Locations" ToRole="Cities" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__id_locati__787EE5A0" FromRole="Locations" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="request">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_ann" Type="Int32" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="id_status" Type="Int32" />
+          <Property Name="dateReq" Type="DateTime" Precision="0" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="updated_at" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Adoptions" Relationship="Self.FK__Adoptions__id_re__339FAB6E" FromRole="requests" ToRole="Adoptions" />
+          <NavigationProperty Name="announcement" Relationship="Self.FK__requests__id_ann__2CF2ADDF" FromRole="requests" ToRole="announcements" />
+          <NavigationProperty Name="status" Relationship="Self.FK__requests__id_sta__2EDAF651" FromRole="requests" ToRole="status" />
+          <NavigationProperty Name="User" Relationship="Self.FK__requests__id_use__2DE6D218" FromRole="requests" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Residence">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__id_reside__797309D9" FromRole="Residences" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__id_role__778AC167" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Species">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Animals" Relationship="Self.FK__Animal__id_speci__09A971A2" FromRole="Species" ToRole="Animal" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mark" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="requests" Relationship="Self.FK__requests__id_sta__2EDAF651" FromRole="status" ToRole="requests" />
+        </EntityType>
+        <EntityType Name="update">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_adoption" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="image_path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dateTook" Type="DateTime" Precision="0" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Adoption" Relationship="Self.FK__updates__id_adop__3A4CA8FD" FromRole="updates" ToRole="Adoptions" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="surname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="familyMembers" Type="Int32" />
+          <Property Name="dateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="id_role" Type="Int32" />
+          <Property Name="id_residence" Type="Int32" />
+          <Property Name="id_location" Type="Int32" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="updated_at" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Adoptions" Relationship="Self.FK__Adoptions__id_ne__3587F3E0" FromRole="Users" ToRole="Adoptions" />
+          <NavigationProperty Name="Adoptions1" Relationship="Self.FK__Adoptions__id_pr__3493CFA7" FromRole="Users" ToRole="Adoptions" />
+          <NavigationProperty Name="Animals" Relationship="Self.FK__Animal__id_user__07C12930" FromRole="Users" ToRole="Animal" />
+          <NavigationProperty Name="announcements" Relationship="Self.FK__announcem__id_us__2645B050" FromRole="Users" ToRole="announcements" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__Users__id_locati__787EE5A0" FromRole="Users" ToRole="Locations" />
+          <NavigationProperty Name="requests" Relationship="Self.FK__requests__id_use__2DE6D218" FromRole="Users" ToRole="requests" />
+          <NavigationProperty Name="Residence" Relationship="Self.FK__Users__id_reside__797309D9" FromRole="Users" ToRole="Residences" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Users__id_role__778AC167" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="users_jobs" Relationship="Self.FK__users_job__id_us__7D439ABD" FromRole="Users" ToRole="users_jobs" />
+        </EntityType>
+        <EntityType Name="users_jobs">
+          <Key>
+            <PropertyRef Name="id_user" />
+            <PropertyRef Name="id_job" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="id_job" Type="Int32" Nullable="false" />
+          <Property Name="salary" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Job" Relationship="Self.FK__users_job__id_jo__7E37BEF6" FromRole="users_jobs" ToRole="Jobs" />
+          <NavigationProperty Name="User" Relationship="Self.FK__users_job__id_us__7D439ABD" FromRole="users_jobs" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Vaccine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="animal_vaccines" Relationship="Self.FK__animal_va__id_va__18EBB532" FromRole="Vaccines" ToRole="animal_vaccines" />
+        </EntityType>
+        <Association Name="FK__Adoptions__id_an__367C1819">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+          <End Role="Adoptions" Type="Self.Adoption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Adoptions">
+              <PropertyRef Name="id_animal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adoptions__id_ne__3587F3E0">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Adoptions" Type="Self.Adoption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Adoptions">
+              <PropertyRef Name="id_new_owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adoptions__id_pr__3493CFA7">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Adoptions" Type="Self.Adoption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Adoptions">
+              <PropertyRef Name="id_previous_owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adoptions__id_re__339FAB6E">
+          <End Role="requests" Type="Self.request" Multiplicity="1" />
+          <End Role="Adoptions" Type="Self.Adoption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="requests">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Adoptions">
+              <PropertyRef Name="id_request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__updates__id_adop__3A4CA8FD">
+          <End Role="Adoptions" Type="Self.Adoption" Multiplicity="0..1" />
+          <End Role="updates" Type="Self.update" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adoptions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="updates">
+              <PropertyRef Name="id_adoption" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__id_gende__08B54D69">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="id_gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__id_speci__09A971A2">
+          <End Role="Species" Type="Self.Species" Multiplicity="0..1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Species">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="id_species" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__id_user__07C12930">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animal_co__id_an__10566F31">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+          <End Role="animal_conditions" Type="Self.animal_conditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="animal_conditions">
+              <PropertyRef Name="id_animal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animal_va__id_an__17F790F9">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+          <End Role="animal_vaccines" Type="Self.animal_vaccines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="animal_vaccines">
+              <PropertyRef Name="id_animal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__announcem__id_an__25518C17">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+          <End Role="announcements" Type="Self.announcement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="announcements">
+              <PropertyRef Name="id_animal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__images__id_anima__1CBC4616">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+          <End Role="images" Type="Self.image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="images">
+              <PropertyRef Name="id_animal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animal_co__id_co__114A936A">
+          <End Role="Conditions" Type="Self.Condition" Multiplicity="1" />
+          <End Role="animal_conditions" Type="Self.animal_conditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conditions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="animal_conditions">
+              <PropertyRef Name="id_condition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animal_va__id_va__18EBB532">
+          <End Role="Vaccines" Type="Self.Vaccine" Multiplicity="1" />
+          <End Role="animal_vaccines" Type="Self.animal_vaccines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaccines">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="animal_vaccines">
+              <PropertyRef Name="id_vaccine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__announcem__id_us__2645B050">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="announcements" Type="Self.announcement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="announcements">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__requests__id_ann__2CF2ADDF">
+          <End Role="announcements" Type="Self.announcement" Multiplicity="0..1" />
+          <End Role="requests" Type="Self.request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="announcements">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="requests">
+              <PropertyRef Name="id_ann" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Locations__id_ci__6E01572D">
+          <End Role="Cities" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Locations" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Locations">
+              <PropertyRef Name="id_city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users_job__id_jo__7E37BEF6">
+          <End Role="Jobs" Type="Self.Job" Multiplicity="1" />
+          <End Role="users_jobs" Type="Self.users_jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jobs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users_jobs">
+              <PropertyRef Name="id_job" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__id_locati__787EE5A0">
+          <End Role="Locations" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__requests__id_sta__2EDAF651">
+          <End Role="status" Type="Self.status" Multiplicity="0..1" />
+          <End Role="requests" Type="Self.request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="requests">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__requests__id_use__2DE6D218">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="requests" Type="Self.request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="requests">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__id_reside__797309D9">
+          <End Role="Residences" Type="Self.Residence" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residences">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_residence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__id_role__778AC167">
+          <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users_job__id_us__7D439ABD">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="users_jobs" Type="Self.users_jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users_jobs">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="adoptpetsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adoptions" EntityType="Self.Adoption" />
+          <EntitySet Name="Animals" EntityType="Self.Animal" />
+          <EntitySet Name="animal_conditions" EntityType="Self.animal_conditions" />
+          <EntitySet Name="animal_vaccines" EntityType="Self.animal_vaccines" />
+          <EntitySet Name="announcements" EntityType="Self.announcement" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Conditions" EntityType="Self.Condition" />
+          <EntitySet Name="Genders" EntityType="Self.Gender" />
+          <EntitySet Name="images" EntityType="Self.image" />
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="requests" EntityType="Self.request" />
+          <EntitySet Name="Residences" EntityType="Self.Residence" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Species" EntityType="Self.Species" />
+          <EntitySet Name="status" EntityType="Self.status" />
+          <EntitySet Name="updates" EntityType="Self.update" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="users_jobs" EntityType="Self.users_jobs" />
+          <EntitySet Name="Vaccines" EntityType="Self.Vaccine" />
+          <AssociationSet Name="FK__Adoptions__id_an__367C1819" Association="Self.FK__Adoptions__id_an__367C1819">
+            <End Role="Animal" EntitySet="Animals" />
+            <End Role="Adoptions" EntitySet="Adoptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adoptions__id_ne__3587F3E0" Association="Self.FK__Adoptions__id_ne__3587F3E0">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Adoptions" EntitySet="Adoptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adoptions__id_pr__3493CFA7" Association="Self.FK__Adoptions__id_pr__3493CFA7">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Adoptions" EntitySet="Adoptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adoptions__id_re__339FAB6E" Association="Self.FK__Adoptions__id_re__339FAB6E">
+            <End Role="requests" EntitySet="requests" />
+            <End Role="Adoptions" EntitySet="Adoptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__updates__id_adop__3A4CA8FD" Association="Self.FK__updates__id_adop__3A4CA8FD">
+            <End Role="Adoptions" EntitySet="Adoptions" />
+            <End Role="updates" EntitySet="updates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__id_gende__08B54D69" Association="Self.FK__Animal__id_gende__08B54D69">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="Animal" EntitySet="Animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__id_speci__09A971A2" Association="Self.FK__Animal__id_speci__09A971A2">
+            <End Role="Species" EntitySet="Species" />
+            <End Role="Animal" EntitySet="Animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__id_user__07C12930" Association="Self.FK__Animal__id_user__07C12930">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Animal" EntitySet="Animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animal_co__id_an__10566F31" Association="Self.FK__animal_co__id_an__10566F31">
+            <End Role="Animal" EntitySet="Animals" />
+            <End Role="animal_conditions" EntitySet="animal_conditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animal_va__id_an__17F790F9" Association="Self.FK__animal_va__id_an__17F790F9">
+            <End Role="Animal" EntitySet="Animals" />
+            <End Role="animal_vaccines" EntitySet="animal_vaccines" />
+          </AssociationSet>
+          <AssociationSet Name="FK__announcem__id_an__25518C17" Association="Self.FK__announcem__id_an__25518C17">
+            <End Role="Animal" EntitySet="Animals" />
+            <End Role="announcements" EntitySet="announcements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__images__id_anima__1CBC4616" Association="Self.FK__images__id_anima__1CBC4616">
+            <End Role="Animal" EntitySet="Animals" />
+            <End Role="images" EntitySet="images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animal_co__id_co__114A936A" Association="Self.FK__animal_co__id_co__114A936A">
+            <End Role="Conditions" EntitySet="Conditions" />
+            <End Role="animal_conditions" EntitySet="animal_conditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animal_va__id_va__18EBB532" Association="Self.FK__animal_va__id_va__18EBB532">
+            <End Role="Vaccines" EntitySet="Vaccines" />
+            <End Role="animal_vaccines" EntitySet="animal_vaccines" />
+          </AssociationSet>
+          <AssociationSet Name="FK__announcem__id_us__2645B050" Association="Self.FK__announcem__id_us__2645B050">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="announcements" EntitySet="announcements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__requests__id_ann__2CF2ADDF" Association="Self.FK__requests__id_ann__2CF2ADDF">
+            <End Role="announcements" EntitySet="announcements" />
+            <End Role="requests" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Locations__id_ci__6E01572D" Association="Self.FK__Locations__id_ci__6E01572D">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Locations" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users_job__id_jo__7E37BEF6" Association="Self.FK__users_job__id_jo__7E37BEF6">
+            <End Role="Jobs" EntitySet="Jobs" />
+            <End Role="users_jobs" EntitySet="users_jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__id_locati__787EE5A0" Association="Self.FK__Users__id_locati__787EE5A0">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__requests__id_sta__2EDAF651" Association="Self.FK__requests__id_sta__2EDAF651">
+            <End Role="status" EntitySet="status" />
+            <End Role="requests" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__requests__id_use__2DE6D218" Association="Self.FK__requests__id_use__2DE6D218">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="requests" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__id_reside__797309D9" Association="Self.FK__Users__id_reside__797309D9">
+            <End Role="Residences" EntitySet="Residences" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__id_role__778AC167" Association="Self.FK__Users__id_role__778AC167">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users_job__id_us__7D439ABD" Association="Self.FK__users_job__id_us__7D439ABD">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="users_jobs" EntitySet="users_jobs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="adoptpetsModelStoreContainer" CdmEntityContainer="adoptpetsEntities">
+          <EntitySetMapping Name="Adoptions">
+            <EntityTypeMapping TypeName="adoptpetsModel.Adoption">
+              <MappingFragment StoreEntitySet="Adoptions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_request" ColumnName="id_request" />
+                <ScalarProperty Name="id_animal" ColumnName="id_animal" />
+                <ScalarProperty Name="id_previous_owner" ColumnName="id_previous_owner" />
+                <ScalarProperty Name="id_new_owner" ColumnName="id_new_owner" />
+                <ScalarProperty Name="adoption_date" ColumnName="adoption_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Animals">
+            <EntityTypeMapping TypeName="adoptpetsModel.Animal">
+              <MappingFragment StoreEntitySet="Animal">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id_species" ColumnName="id_species" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_gender" ColumnName="id_gender" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="animal_conditions">
+            <EntityTypeMapping TypeName="adoptpetsModel.animal_conditions">
+              <MappingFragment StoreEntitySet="animal_conditions">
+                <ScalarProperty Name="id_animal" ColumnName="id_animal" />
+                <ScalarProperty Name="id_condition" ColumnName="id_condition" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="animal_vaccines">
+            <EntityTypeMapping TypeName="adoptpetsModel.animal_vaccines">
+              <MappingFragment StoreEntitySet="animal_vaccines">
+                <ScalarProperty Name="id_animal" ColumnName="id_animal" />
+                <ScalarProperty Name="id_vaccine" ColumnName="id_vaccine" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="announcements">
+            <EntityTypeMapping TypeName="adoptpetsModel.announcement">
+              <MappingFragment StoreEntitySet="announcements">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_animal" ColumnName="id_animal" />
+                <ScalarProperty Name="dateAnn" ColumnName="dateAnn" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="adoptpetsModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conditions">
+            <EntityTypeMapping TypeName="adoptpetsModel.Condition">
+              <MappingFragment StoreEntitySet="Conditions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="adoptpetsModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="images">
+            <EntityTypeMapping TypeName="adoptpetsModel.image">
+              <MappingFragment StoreEntitySet="images">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_animal" ColumnName="id_animal" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
+                <ScalarProperty Name="tookOn" ColumnName="tookOn" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="adoptpetsModel.Job">
+              <MappingFragment StoreEntitySet="Jobs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="adoptpetsModel.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_city" ColumnName="id_city" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="requests">
+            <EntityTypeMapping TypeName="adoptpetsModel.request">
+              <MappingFragment StoreEntitySet="requests">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_ann" ColumnName="id_ann" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="dateReq" ColumnName="dateReq" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Residences">
+            <EntityTypeMapping TypeName="adoptpetsModel.Residence">
+              <MappingFragment StoreEntitySet="Residences">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="adoptpetsModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Species">
+            <EntityTypeMapping TypeName="adoptpetsModel.Species">
+              <MappingFragment StoreEntitySet="Species">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status">
+            <EntityTypeMapping TypeName="adoptpetsModel.status">
+              <MappingFragment StoreEntitySet="status">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="mark" ColumnName="mark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="updates">
+            <EntityTypeMapping TypeName="adoptpetsModel.update">
+              <MappingFragment StoreEntitySet="updates">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_adoption" ColumnName="id_adoption" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
+                <ScalarProperty Name="dateTook" ColumnName="dateTook" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="adoptpetsModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="familyMembers" ColumnName="familyMembers" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="id_residence" ColumnName="id_residence" />
+                <ScalarProperty Name="id_location" ColumnName="id_location" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users_jobs">
+            <EntityTypeMapping TypeName="adoptpetsModel.users_jobs">
+              <MappingFragment StoreEntitySet="users_jobs">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_job" ColumnName="id_job" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vaccines">
+            <EntityTypeMapping TypeName="adoptpetsModel.Vaccine">
+              <MappingFragment StoreEntitySet="Vaccines">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

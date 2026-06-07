@@ -1,0 +1,116 @@
+﻿@model AdoptPets.Models.announcement
+
+@{
+    ViewBag.Title = "Detalji oglasa";
+    var photos = Model.Animal.images.ToList();
+}
+
+<div class="details-container">
+    <h2 class="details-title">@Model.Animal.name</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert-success-custom">@TempData["Success"]</div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert-error-custom">@TempData["Error"]</div>
+    }
+
+    <div class="details-layout">
+        <div class="photo-slider">
+            @if (photos.Any())
+            {
+                <button class="slider-btn left" onclick="changePhoto(-1)">&#10094;</button>
+
+                <img id="mainPhoto" src="@photos[0].image_path" class="details-photo" />
+
+                <button class="slider-btn right" onclick="changePhoto(1)">&#10095;</button>
+            }
+            else
+            {
+                <div class="details-no-photo">Nema fotografije</div>
+            }
+        </div>
+
+        <div class="details-info">
+            <p><strong>Vrsta/rasa:</strong> @Model.Animal.Species.name</p>
+            <p><strong>Pol:</strong> @Model.Animal.Gender.name</p>
+            <p><strong>Datum rođenja:</strong> @Model.Animal.dateOfBirth.Value.ToString("dd.MM.yyyy")</p>
+
+            <p><strong>Grad:</strong> @Model.User.Location.City.name</p>
+            <p><strong>Adresa:</strong> @Model.User.Location.address</p>
+
+            <p><strong>Vlasnik:</strong> @Model.User.name @Model.User.surname</p>
+            <p><strong>Telefon:</strong> @Model.User.phoneNumber</p>
+
+            <hr />
+
+            <h4>Opis</h4>
+            <p>@Model.description</p>
+
+            <h4>Stanja</h4>
+            @if (Model.Animal.animal_conditions.Any())
+            {
+                <ul>
+                    @foreach (var c in Model.Animal.animal_conditions)
+                    {
+                        <li>@c.Condition.name</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>Nema unesenih stanja.</p>
+            }
+
+            <h4>Vakcine</h4>
+            @if (Model.Animal.animal_vaccines.Any())
+            {
+                <ul>
+                    @foreach (var v in Model.Animal.animal_vaccines)
+                    {
+                        <li>@v.Vaccine.name</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>Nema unesenih vakcina.</p>
+            }
+
+            <br />
+
+            @Html.ActionLink("Zatraži usvajanje", "Create", "requests", new { announcementId = Model.id }, new { @class = "btn-main" })
+            @Html.ActionLink("Nazad", "Index", null, new { @class = "btn-secondary" })
+        </div>
+    </div>
+</div>
+
+<script>
+    var photos = [
+        @foreach (var photo in photos)
+        {
+            <text>"@photo.image_path",</text>
+        }
+    ];
+
+    var currentIndex = 0;
+
+    function changePhoto(direction) {
+        if (photos.length === 0) return;
+
+        currentIndex += direction;
+
+        if (currentIndex < 0) {
+            currentIndex = photos.length - 1;
+        }
+
+        if (currentIndex >= photos.length) {
+            currentIndex = 0;
+        }
+
+        document.getElementById("mainPhoto").src = photos[currentIndex];
+    }
+</script>

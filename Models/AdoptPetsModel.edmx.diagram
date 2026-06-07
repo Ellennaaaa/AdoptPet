@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="69846438f5674d8a9df1c21c210f6150" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="adoptpetsModel.Adoption" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.Animal" Width="1.5" PointX="10.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.animal_conditions" Width="1.5" PointX="12.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.animal_vaccines" Width="1.5" PointX="12.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.announcement" Width="1.5" PointX="15.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.City" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.Condition" Width="1.5" PointX="10.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.Gender" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.image" Width="1.5" PointX="12.75" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.Job" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.Location" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.request" Width="1.5" PointX="18" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.Residence" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.Role" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.Species" Width="1.5" PointX="8.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.status" Width="1.5" PointX="15.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.update" Width="1.5" PointX="9.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.User" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.users_jobs" Width="1.5" PointX="7.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="adoptpetsModel.Vaccine" Width="1.5" PointX="10.5" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="adoptpetsModel.FK__Adoptions__id_an__367C1819" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__Adoptions__id_ne__3587F3E0" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__Adoptions__id_pr__3493CFA7" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__Adoptions__id_re__339FAB6E" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__updates__id_adop__3A4CA8FD" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__Animal__id_gende__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__Animal__id_speci__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__Animal__id_user__07C12930" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__animal_co__id_an__10566F31" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__animal_va__id_an__17F790F9" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__announcem__id_an__25518C17" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__images__id_anima__1CBC4616" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__animal_co__id_co__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__animal_va__id_va__18EBB532" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__announcem__id_us__2645B050" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__requests__id_ann__2CF2ADDF" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__Locations__id_ci__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__users_job__id_jo__7E37BEF6" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__Users__id_locati__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__requests__id_sta__2EDAF651" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__requests__id_use__2DE6D218" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__Users__id_reside__797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__Users__id_role__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="adoptpetsModel.FK__users_job__id_us__7D439ABD" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

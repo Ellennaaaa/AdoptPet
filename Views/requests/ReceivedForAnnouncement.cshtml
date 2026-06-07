@@ -1,0 +1,39 @@
+﻿@model IEnumerable<AdoptPets.Models.request>
+
+@{
+    ViewBag.Title = "Zahtjevi za usvajanje";
+}
+
+<h2 class="page-title">Zahtjevi za moje oglase</h2>
+
+<div class="requests-list">
+    @foreach (var item in Model)
+    {
+        var job = item.User.users_jobs.FirstOrDefault();
+
+        <div class="request-card">
+            <h3>@item.announcement.Animal.name</h3>
+
+            <p><strong>Kandidat:</strong> @item.User.name @item.User.surname</p>
+            <p><strong>Email:</strong> @item.User.email</p>
+            <p><strong>Telefon:</strong> @item.User.phoneNumber</p>
+            <p><strong>Grad:</strong> @item.User.Location.City.name</p>
+            <p><strong>Adresa:</strong> @item.User.Location.address</p>
+            <p><strong>Stanovanje:</strong> @item.User.Residence.name</p>
+            <p><strong>Broj članova porodice:</strong> @item.User.familyMembers</p>
+
+            @if (job != null)
+            {
+                <p><strong>Zanimanje:</strong> @job.Job.name</p>
+                <p><strong>Plata:</strong> @job.salary €</p>
+            }
+
+            <p><strong>Status:</strong> @item.status.mark</p>
+
+            @if (item.id_status == 1)
+            {
+                @Html.ActionLink("Prihvati", "Accept", new { id = item.id }, new { @class = "btn-main" })
+            }
+        </div>
+    }
+</div>

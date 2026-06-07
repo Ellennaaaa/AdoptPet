@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AdoptPets.Models.announcement>
+
+@{
+    ViewBag.Title = "Moji oglasi";
+}
+
+<h2 class="page-title">Moji oglasi</h2>
+
+<div class="announcement-grid">
+    @foreach (var item in Model)
+    {
+        var firstImage = item.Animal.images.FirstOrDefault();
+
+        <div class="announcement-card">
+            @if (firstImage != null)
+            {
+                <img src="@firstImage.image_path" class="animal-card-img" />
+            }
+            else
+            {
+                <div class="no-image">Nema fotografije</div>
+            }
+
+            <div class="card-body">
+                <h3>@item.Animal.name</h3>
+                <p><strong>Vrsta/rasa:</strong> @item.Animal.Species.name</p>
+                <p><strong>Status:</strong> @(item.status == true ? "Aktivan" : "Neaktivan")</p>
+
+                @Html.ActionLink("Detalji", "Details", new { id = item.id }, new { @class = "btn-secondary" })
+
+                @Html.ActionLink(
+                    "Zahtjevi",
+                    "ReceivedForAnnouncement",
+                    "requests",
+                    new { announcementId = item.id },
+                    new { @class = "btn-main" })
+            </div>
+        </div>
+    }
+</div>

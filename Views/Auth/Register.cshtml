@@ -1,0 +1,111 @@
+﻿@model AdoptPets.ViewModels.RegisterViewModel
+
+@{
+    ViewBag.Title = "Registracija";
+}
+
+<div class="auth-container">
+    <h2 class="auth-title">Registracija</h2>
+
+    @using (Html.BeginForm("Register", "Auth", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div>
+            @Html.LabelFor(m => m.name, "Ime")
+            @Html.TextBoxFor(m => m.name)
+            @Html.ValidationMessageFor(m => m.name, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.surname, "Prezime")
+            @Html.TextBoxFor(m => m.surname)
+            @Html.ValidationMessageFor(m => m.surname, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.email, "Email")
+            @Html.TextBoxFor(m => m.email)
+            @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.username, "Korisničko ime")
+            @Html.TextBoxFor(m => m.username)
+            @Html.ValidationMessageFor(m => m.username, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.password, "Lozinka")
+            @Html.PasswordFor(m => m.password)
+            @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.confirmPassword, "Potvrdite lozinku")
+            @Html.PasswordFor(m => m.confirmPassword)
+            @Html.ValidationMessageFor(m => m.confirmPassword, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.phoneNumber, "Broj telefona")
+            @Html.TextBoxFor(m => m.phoneNumber)
+            @Html.ValidationMessageFor(m => m.phoneNumber, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.familyMembers, "Broj članova porodice")
+            @Html.TextBoxFor(m => m.familyMembers)
+            @Html.ValidationMessageFor(m => m.familyMembers, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.dateOfBirth, "Datum rođenja")
+            @Html.TextBoxFor(m => m.dateOfBirth, "{0:yyyy-MM-dd}", new { type = "date" })
+            @Html.ValidationMessageFor(m => m.dateOfBirth, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.id_residence, "Objekat stanovanja")
+            @Html.DropDownList("id_residence", null, "Izaberite objekat stanovanja")
+            @Html.ValidationMessageFor(m => m.id_residence, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.id_job, "Zanimanje")
+            @Html.DropDownList("id_job", null, "Izaberite zanimanje")
+            @Html.ValidationMessageFor(m => m.id_job, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.salary, "Mjesečna plata")
+            @Html.TextBoxFor(m => m.salary, new
+                {
+                    type = "number",
+                    min = "0",
+                    step = "0.01"
+                })
+            @Html.ValidationMessageFor(m => m.salary, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.id_city, "Grad")
+            @Html.DropDownList("id_city", null, "Izaberite grad")
+            @Html.ValidationMessageFor(m => m.id_city, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.address, "Adresa")
+            @Html.TextBoxFor(m => m.address)
+            @Html.ValidationMessageFor(m => m.address, "", new { @class = "text-danger" })
+        </div>
+
+        <button type="submit" class="auth-btn">Registrujte se</button>
+
+        <div class="auth-link">
+            Imate nalog?
+            @Html.ActionLink("Prijavite se", "Login", "Auth")
+        </div>
+    }
+</div>
