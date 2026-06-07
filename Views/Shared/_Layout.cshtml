@@ -19,6 +19,9 @@
                 @if (Session["UserId"] != null)
                 {
                     <li>@Html.ActionLink("Dodaj oglas", "Create", "announcements")</li>
+                    <li>@Html.ActionLink("Usvojene životinje", "MyAdoptions", "updates")</li>
+                    <li>@Html.ActionLink("Moje životinje", "Mine", "announcements")</li>
+                    <li>@Html.ActionLink("Moji zahtjevi", "Mine", "requests")</li>
                 }
             </ul>
 

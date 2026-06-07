@@ -1,0 +1,54 @@
+﻿@model IEnumerable<AdoptPets.Models.Adoption>
+
+@{
+    ViewBag.Title = "Moje usvojene životinje";
+}
+
+<h2 class="page-title">Moje usvojene životinje</h2>
+
+<div class="announcement-grid">
+
+    @foreach (var item in Model)
+    {
+        var firstImage = item.Animal.images.FirstOrDefault();
+
+        <div class="announcement-card">
+
+            @if (firstImage != null)
+            {
+                <img src="@firstImage.image_path" class="animal-card-img" />
+            }
+            else
+            {
+                <div class="no-image">
+                    Nema fotografije
+                </div>
+            }
+
+            <div class="card-body">
+
+                <h3>@item.Animal.name</h3>
+
+                <p>
+                    <strong>Datum usvajanja:</strong>
+                    @item.adoption_date.ToString("dd.MM.yyyy")
+                </p>
+
+                <p>
+                    <strong>Prethodni vlasnik:</strong>
+                    @item.User.name @item.User.surname
+                </p>
+
+                @Html.ActionLink(
+                    "Dodaj update",
+                    "Create",
+                    "updates",
+                    new { adoptionId = item.id },
+                    new { @class = "btn-main" })
+
+            </div>
+
+        </div>
+    }
+
+</div>

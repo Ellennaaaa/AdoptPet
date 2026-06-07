@@ -21,6 +21,7 @@ namespace AdoptPets.Controllers
 
             announcement ann = db.announcements.Find(announcementId);
 
+
             if (ann == null)
             {
                 return HttpNotFound();
@@ -114,6 +115,26 @@ namespace AdoptPets.Controllers
             return RedirectToAction(
                 "ReceivedForAnnouncement",
                 new { announcementId = req.id_ann });
+        }
+
+        public ActionResult Mine()
+        {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            int userId = (int)Session["UserId"];
+
+            var myRequests = db.requests
+                .Include(r => r.announcement)
+                .Include(r => r.announcement.Animal)
+                .Include(r => r.announcement.Animal.images)
+                .Include(r => r.status)
+                .Where(r => r.id_user == userId)
+                .ToList();
+
+            return View(myRequests);
         }
     }
 }

@@ -1,0 +1,53 @@
+﻿@model AdoptPets.ViewModels.CreateUpdateViewModel
+
+@{
+    ViewBag.Title = "Dodaj update";
+}
+
+<div class="auth-container">
+    <h2 class="auth-title">Dodaj update</h2>
+
+    @using (Html.BeginForm("Create", "updates", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.adoptionId)
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div>
+            @Html.LabelFor(m => m.description, "Opis")
+            @Html.TextAreaFor(m => m.description)
+            @Html.ValidationMessageFor(m => m.description, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            <label>Fotografija</label>
+
+            <div class="file-upload-container">
+                <label for="image" class="file-upload-btn">
+                    Izaberite fotografiju
+                </label>
+
+                <input type="file" id="image" name="image" hidden />
+
+                <span id="file-name">
+                    Nijedan fajl nije izabran
+                </span>
+            </div>
+        </div>
+
+        <button type="submit" class="auth-btn">Sačuvaj update</button>
+    }
+</div>
+
+<script>
+    document.getElementById("image").addEventListener("change", function () {
+        let text = "Nijedan fajl nije izabran";
+
+        if (this.files.length === 1) {
+            text = this.files[0].name;
+        }
+
+        document.getElementById("file-name").textContent = text;
+    });
+</script>

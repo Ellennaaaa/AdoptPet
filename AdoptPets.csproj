@@ -188,6 +188,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\requestsController.cs" />
+    <Compile Include="Controllers\updatesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -268,6 +269,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CreateUpdateViewModel.cs" />
     <Compile Include="ViewModels\CreateAnnouncementViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
@@ -371,6 +373,9 @@
     <Content Include="Uploads\Animals\df4a457a-dc67-4bb2-9685-d4c713a832d4.webp" />
     <Content Include="Views\requests\ReceivedForAnnouncement.cshtml" />
     <Content Include="Views\announcements\Mine.cshtml" />
+    <Content Include="Views\requests\Mine.cshtml" />
+    <Content Include="Views\updates\MyAdoptions.cshtml" />
+    <Content Include="Views\updates\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
